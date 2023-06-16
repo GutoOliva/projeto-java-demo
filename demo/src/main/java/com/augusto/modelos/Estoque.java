@@ -50,5 +50,8 @@ public class Estoque {
         this.quantidade = quantidade;
     }
 
-    
+    @Override
+    public String toString() {
+        return "Estoque [id=" + id + ", produto=" + produto + ", quantidade=" + quantidade + "]";
+    }
 }

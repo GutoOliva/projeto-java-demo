@@ -1,61 +1,57 @@
 package com.augusto.dao;
 
+import com.augusto.modelos.Venda;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
-
-import com.augusto.modelos.Produto;
-
 import java.util.List;
 
-public class ProdutoDAO{
+public class VendaDAO{
     private EntityManagerFactory emf;
 
-    public ProdutoDAO() {
+    public VendaDAO() {
         emf = Persistence.createEntityManagerFactory("my-persistence-unit");
     }
 
-    public void CadastrarProduto(Produto produto) {
+    public void cadastrarVenda(Venda venda) {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
-        em.persist(produto);
+        em.persist(venda);
         em.getTransaction().commit();
         em.close();
     }
 
-    public Produto buscarProdutoPorId(Long id) {
+    public Venda buscarVendaPorId(Long id) {
         EntityManager em = emf.createEntityManager();
-        Produto produto = em.find(Produto.class, id);
+        Venda venda = em.find(Venda.class, id);
         em.close();
-        return produto;
+        return venda;
     }
 
-    public List<Produto> buscarTodosProdutos() {
+    public List<Venda> buscarTodasVendas() {
         EntityManager em = emf.createEntityManager();
-        Query query = em.createQuery("SELECT p FROM Produto p");
-        List<Produto> produtos = query.getResultList();
+        Query query = em.createQuery("SELECT v FROM Venda v");
+        List<Venda> vendas = query.getResultList();
         em.close();
-        return produtos;
+        return vendas;
     }
 
-    public void atualizarProduto(Produto produto) {
+    public void atualizarVenda(Venda venda) {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
-        em.merge(produto);
+        em.merge(venda);
         em.getTransaction().commit();
         em.close();
     }
 
-    public void excluirProduto(Produto produto) {
-        
+    public void excluirVenda(Venda venda) {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
-        System.out.println(produto.getId());
-        produto = em.merge(produto);
-        em.remove(produto);
+        venda = em.merge(venda);
+        em.remove(venda);
         em.getTransaction().commit();
         em.close();
     }
 }
-

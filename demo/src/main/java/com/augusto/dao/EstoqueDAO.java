@@ -43,11 +43,12 @@ public class EstoqueDAO {
     }
 
     public Estoque buscarPorId(Produto produto) {
-        EntityManager em = emf.createEntityManager();
-        Estoque estoque = em.find(Estoque.class, produto);
-        em.close();
-        return estoque;
-    }
+    EntityManager em = emf.createEntityManager();
+    Estoque estoque = em.find(Estoque.class, produto);
+    em.close();
+    return estoque;
+}
+
 
     public List<Estoque> buscarTodos() {
         EntityManager em = emf.createEntityManager();
