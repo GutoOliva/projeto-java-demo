@@ -37,21 +37,4 @@ public class VendaDAO{
         em.close();
         return vendas;
     }
-
-    public void atualizarVenda(Venda venda) {
-        EntityManager em = emf.createEntityManager();
-        em.getTransaction().begin();
-        em.merge(venda);
-        em.getTransaction().commit();
-        em.close();
-    }
-
-    public void excluirVenda(Venda venda) {
-        EntityManager em = emf.createEntityManager();
-        em.getTransaction().begin();
-        venda = em.merge(venda);
-        em.remove(venda);
-        em.getTransaction().commit();
-        em.close();
-    }
 }

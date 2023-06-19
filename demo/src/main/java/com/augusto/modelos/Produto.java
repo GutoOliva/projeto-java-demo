@@ -2,23 +2,26 @@ package com.augusto.modelos;
 
 import java.io.Serializable;
 import java.util.Date;
+
+import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 
 @Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "DTYPE")
 public class Produto implements Serializable{
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;    
-    
+    private long id;
     private String nome;
     private double preco;
     private int quantidade;
     private String fornecedor;
-
 
     public Produto() {
     }
@@ -30,7 +33,7 @@ public class Produto implements Serializable{
         this.fornecedor = fornecedor;
     }
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
@@ -62,21 +65,15 @@ public class Produto implements Serializable{
         this.quantidade = quantidade;
     }
 
-    public String getFornecedor() {
-        return fornecedor;
-    }
-
-    public void setFornecedor(String fornecedor) {
-        this.fornecedor = fornecedor;
-    }
-
-    @Override
-    public String toString() {
-        return "Produto [id=" + id + ", nome=" + nome + ", preco=" + preco + ", quantidade em estoque=" + quantidade
-                + ", fornecedor=" + fornecedor;
-    }
-
     public Date getDataCadastro() {
         return null;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getFornecedor() {
+        return fornecedor;
     }
 }

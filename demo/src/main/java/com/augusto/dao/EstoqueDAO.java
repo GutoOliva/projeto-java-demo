@@ -42,9 +42,30 @@ public class EstoqueDAO {
         em.close();
     }
 
-    public Estoque buscarPorId(Produto produto) {
+    public Estoque buscarPorId(long l) {
     EntityManager em = emf.createEntityManager();
-    Estoque estoque = em.find(Estoque.class, produto);
+    Estoque estoque = em.find(Estoque.class, l);
+    em.close();
+    return estoque;
+}
+
+    public Estoque buscarEstoquePorProduto(Produto produto) {
+    EntityManager em = emf.createEntityManager();
+    Query query = em.createQuery("SELECT e FROM Estoque e WHERE e.produto = :produto");
+    query.setParameter("produto", produto);
+    List<Estoque> estoques = query.getResultList();
+    em.close();
+    
+    if (!estoques.isEmpty()) {
+        return estoques.get(0);
+    }
+    
+    return null;
+}
+
+    public Estoque buscaPorId(Produto produtoSelecionado) {
+    EntityManager em = emf.createEntityManager();
+    Estoque estoque = em.find(Estoque.class, produtoSelecionado);
     em.close();
     return estoque;
 }

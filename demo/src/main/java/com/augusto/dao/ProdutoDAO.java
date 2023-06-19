@@ -39,14 +39,6 @@ public class ProdutoDAO{
         return produtos;
     }
 
-    public void atualizarProduto(Produto produto) {
-        EntityManager em = emf.createEntityManager();
-        em.getTransaction().begin();
-        em.merge(produto);
-        em.getTransaction().commit();
-        em.close();
-    }
-
     public void excluirProduto(Produto produto) {
         
         EntityManager em = emf.createEntityManager();
